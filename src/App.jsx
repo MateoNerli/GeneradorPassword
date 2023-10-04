@@ -111,13 +111,12 @@ function App() {
               <li className="flex items-center justify-between py-2">
                 Con numeros
                 <label
-                  htmlFor="include-number"
+                  htmlFor="contieneNumeros"
                   className="inline-flex relative items-center cursor-pointer"
                 >
                   <input
                     type="checkbox"
-                    value=""
-                    id="include-number"
+                    id="contieneNumeros"
                     className="sr-only peer"
                     onChange={(e) =>
                       setPasswordOptions({
@@ -135,13 +134,13 @@ function App() {
               <li className="flex items-center justify-between py-2">
                 Con simbolos
                 <label
-                  htmlFor="include-simbolos"
+                  htmlFor="contieneSimbolos"
                   className="inline-flex relative items-center cursor-pointer"
                 >
                   <input
                     type="checkbox"
                     value=""
-                    id="include-simbolos"
+                    id="contieneSimbolos"
                     className="sr-only peer"
                     onChange={(e) =>
                       setPasswordOptions({
@@ -159,13 +158,13 @@ function App() {
               <li className="flex items-center justify-between py-2">
                 Con mayusculas
                 <label
-                  htmlFor="include-mayusculas"
+                  htmlFor="contieneMayusculas"
                   className="inline-flex relative items-center cursor-pointer"
                 >
                   <input
                     type="checkbox"
                     value=""
-                    id="include-mayusculas"
+                    id="contieneMayusculas"
                     className="sr-only peer"
                     onChange={(e) =>
                       setPasswordOptions({
@@ -183,13 +182,13 @@ function App() {
               <li className="flex items-center justify-between py-2">
                 Con minusculas
                 <label
-                  htmlFor="include-minusculas"
+                  htmlFor="contieneMinusculas"
                   className="inline-flex relative items-center cursor-pointer"
                 >
                   <input
                     type="checkbox"
                     value=""
-                    id="include-minusculas"
+                    id="contieneMinusculas"
                     className="sr-only peer"
                     onChange={(e) =>
                       setPasswordOptions({
