@@ -2,10 +2,11 @@ import { useState } from "react";
 import IconoCopiar from "./components/IconoCopiar";
 import Notificacion, { Copiado, Error } from "./components/Alerta";
 import useCaracteres from "./hooks/caracteres";
-import Opciones from "./components/opciones";
+import Opciones from "./components/Opciones";
 import Contraseña from "./components/Contraseña";
 import Longitud from "./components/Longitud";
 import Boton from "./components/Boton";
+import Seguridad from "./components/Seguridad";
 import "./App.css";
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
             />
           )}
         </div>
+        <Seguridad password={passwordResult} />
         <Longitud
           value={passwordOptions.length}
           onChange={(e) =>
@@ -145,6 +147,7 @@ function App() {
             </ul>
           </div>
         </div>
+
         <Boton onClick={() => generatePassword()} />
       </div>
       <Notificacion />
