@@ -1,29 +1,36 @@
 function Seguridad({ password }) {
-  const esSegura = () => {
-    const longitudMinima = 8;
-    const contieneCaracterEspecial = /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(
-      password
-    );
-    const contieneNumero = /\d/.test(password);
-    const contieneMayuscula = /[A-Z]/.test(password);
-    const contieneMinuscula = /[a-z]/.test(password);
+  const evaluarSeguridad = () => {
+    const longitud = password.length;
 
-    return (
-      password.length >= longitudMinima &&
-      contieneCaracterEspecial &&
-      contieneNumero &&
-      contieneMayuscula &&
-      contieneMinuscula
-    );
+    if (longitud >= 4 && longitud <= 8) {
+      return "con baja seguridad";
+    } else if (longitud > 8 && longitud <= 12) {
+      return "con media seguridad";
+    } else if (longitud > 12) {
+      return "con buena seguridad";
+    } else {
+      return "";
+    }
   };
+
+  const seguridad = evaluarSeguridad();
 
   return (
     <div className="text-white mt-2">
-      {password.length > 0 && esSegura() && (
-        <p className="text-green-600">Contraseña segura</p>
-      )}
-      {password.length > 0 && !esSegura() && (
-        <p className="text-red-600">Contraseña débil</p>
+      {password.length > 0 && (
+        <p
+          className={`text-${
+            seguridad === "con baja seguridad"
+              ? "red"
+              : seguridad === "con media seguridad"
+              ? "yellow"
+              : seguridad === "con buena seguridad"
+              ? "green"
+              : "white"
+          }-600`}
+        >
+          Contraseña {seguridad}
+        </p>
       )}
     </div>
   );
