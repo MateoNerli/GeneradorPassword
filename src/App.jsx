@@ -2,6 +2,10 @@ import { useState } from "react";
 import IconoCopiar from "./components/IconoCopiar";
 import Notificacion, { Copiado, Error } from "./components/Alerta";
 import useCaracteres from "./hooks/caracteres";
+import Opciones from "./components/opciones";
+import Contraseña from "./components/Contraseña";
+import Longitud from "./components/Longitud";
+import Boton from "./components/Boton";
 import "./App.css";
 
 function App() {
@@ -25,10 +29,11 @@ function App() {
     let contra = "";
     let result = "";
 
-    if (passwordOptions.include.numeros) contra += caracteres.numeros;
-    if (passwordOptions.include.simbolos) contra += caracteres.simbolos;
-    if (passwordOptions.include.mayusculas) contra += caracteres.mayusculas;
-    if (passwordOptions.include.minusculas) contra += caracteres.minusculas;
+    const { include } = passwordOptions;
+    if (include.numeros) contra += caracteres.numeros;
+    if (include.simbolos) contra += caracteres.simbolos;
+    if (include.mayusculas) contra += caracteres.mayusculas;
+    if (include.minusculas) contra += caracteres.minusculas;
 
     //validar que se haya seleccionado al menos una opcion
     if (Object.values(passwordOptions.include).every((x) => x === false)) {
@@ -59,16 +64,9 @@ function App() {
     <div className="flex justify-center min-h-screen bg-slate-900 p-6">
       <div className="flex flex-col justify-center items-center container mx-auto gap-2.5">
         <div className="flex flex-col	max-w-md w-full relative">
-          <label className="py-2 font-semibold text-sm text-slate-400">
-            Contraseña Generada
-          </label>
-          <input
+          <Contraseña
             value={passwordResult}
             onChange={(e) => setPasswordResult(e.target.value)}
-            disabled
-            type="text"
-            placeholder="La contraseña generada es ......"
-            className="placeholder:text-center placeholder:text-xs placeholder:text-teal-300 font-mono px-3 py-2 bg-slate-800 rounded-md outline-0 text-white font-normal text-xl w-full"
           />
           {passwordResult !== "" && (
             <IconoCopiar
@@ -77,146 +75,77 @@ function App() {
             />
           )}
         </div>
-        <div className="flex flex-col max-w-md w-full">
-          <label className="py-2 font-normal text-sm text-slate-400">
-            Longitud de la contraseña:{" "}
-            <strong className="font-semibold text-teal-300">
-              {passwordOptions.length}
-            </strong>
-          </label>
-          <div className="flex items-center font-mono px-3 py-2 bg-slate-800 rounded-md outline-0 text-white font-normal text-xl w-full">
-            <span className="px-3">4</span>
-            <input
-              value={passwordOptions.length}
-              onChange={(e) =>
-                setPasswordOptions({
-                  ...passwordOptions,
-                  length: e.target.value,
-                })
-              }
-              min="4"
-              max="32"
-              type="range"
-              className="accent-teal-300 w-full h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-            />
-            <span className="px-3">32</span>
-          </div>
-        </div>
+        <Longitud
+          value={passwordOptions.length}
+          onChange={(e) =>
+            setPasswordOptions({
+              ...passwordOptions,
+              length: e.target.value,
+            })
+          }
+        />
         <div className="flex flex-col max-w-md w-full">
           <label className="py-1 font-semibold text-sm text-slate-400">
             Opciones
           </label>
           <div className="flex flex-col	max-w-md w-full bg-slate-800 p-5 rounded-md">
             <ul className="text-white">
-              <li className="flex items-center justify-between py-2">
-                Con numeros
-                <label
-                  htmlFor="contieneNumeros"
-                  className="inline-flex relative items-center cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    id="contieneNumeros"
-                    className="sr-only peer"
-                    onChange={(e) =>
-                      setPasswordOptions({
-                        ...passwordOptions,
-                        include: {
-                          ...passwordOptions.include,
-                          numeros: e.target.checked,
-                        },
-                      })
-                    }
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-300"></div>
-                </label>
-              </li>
-              <li className="flex items-center justify-between py-2">
-                Con simbolos
-                <label
-                  htmlFor="contieneSimbolos"
-                  className="inline-flex relative items-center cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value=""
-                    id="contieneSimbolos"
-                    className="sr-only peer"
-                    onChange={(e) =>
-                      setPasswordOptions({
-                        ...passwordOptions,
-                        include: {
-                          ...passwordOptions.include,
-                          simbolos: e.target.checked,
-                        },
-                      })
-                    }
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-300"></div>
-                </label>
-              </li>
-              <li className="flex items-center justify-between py-2">
-                Con mayusculas
-                <label
-                  htmlFor="contieneMayusculas"
-                  className="inline-flex relative items-center cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value=""
-                    id="contieneMayusculas"
-                    className="sr-only peer"
-                    onChange={(e) =>
-                      setPasswordOptions({
-                        ...passwordOptions,
-                        include: {
-                          ...passwordOptions.include,
-                          mayusculas: e.target.checked,
-                        },
-                      })
-                    }
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-300"></div>
-                </label>
-              </li>
-              <li className="flex items-center justify-between py-2">
-                Con minusculas
-                <label
-                  htmlFor="contieneMinusculas"
-                  className="inline-flex relative items-center cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value=""
-                    id="contieneMinusculas"
-                    className="sr-only peer"
-                    onChange={(e) =>
-                      setPasswordOptions({
-                        ...passwordOptions,
-                        include: {
-                          ...passwordOptions.include,
-                          minusculas: e.target.checked,
-                        },
-                      })
-                    }
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-300"></div>
-                </label>
-              </li>
+              <Opciones
+                label="Con numeros"
+                checked={passwordOptions.include.numeros}
+                onChange={(e) =>
+                  setPasswordOptions({
+                    ...passwordOptions,
+                    include: {
+                      ...passwordOptions.include,
+                      numeros: e.target.checked,
+                    },
+                  })
+                }
+              />
+              <Opciones
+                label="Con simbolos"
+                checked={passwordOptions.include.simbolos}
+                onChange={(e) =>
+                  setPasswordOptions({
+                    ...passwordOptions,
+                    include: {
+                      ...passwordOptions.include,
+                      simbolos: e.target.checked,
+                    },
+                  })
+                }
+              />
+              <Opciones
+                label="Con mayusculas"
+                checked={passwordOptions.include.mayusculas}
+                onChange={(e) =>
+                  setPasswordOptions({
+                    ...passwordOptions,
+                    include: {
+                      ...passwordOptions.include,
+                      mayusculas: e.target.checked,
+                    },
+                  })
+                }
+              />
+              <Opciones
+                label="Con minusculas"
+                checked={passwordOptions.include.minusculas}
+                onChange={(e) =>
+                  setPasswordOptions({
+                    ...passwordOptions,
+                    include: {
+                      ...passwordOptions.include,
+                      minusculas: e.target.checked,
+                    },
+                  })
+                }
+              />
             </ul>
           </div>
         </div>
-        <div className="my-2 flex flex-col max-w-md w-full">
-          <button
-            className="apperance-none font-semibold text-teal-300 w-full bg-slate-800 rounded-md p-2 hover:bg-teal-300 hover:text-slate-800"
-            onClick={() => {
-              console.log(passwordOptions);
-              generatePassword();
-            }}
-          >
-            Generar Contraseña
-          </button>
-        </div>
+        <Boton onClick={() => generatePassword()} />
       </div>
       <Notificacion />
     </div>
