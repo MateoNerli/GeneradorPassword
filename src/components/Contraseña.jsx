@@ -10,7 +10,7 @@ function Contraseña({ value, onChange }) {
         disabled
         type="text"
         placeholder="La contraseña generada es ......"
-        className="placeholder:text-center placeholder:text-xs placeholder:text-teal-300 font-mono px-3 py-2 bg-slate-800 rounded-md outline-0 text-white font-normal text-xl w-full"
+        className="placeholder:text-center placeholder:text-xs placeholder:text-white font-mono px-3 py-2 bg-blue-600 rounded-md outline-0 text-white font-normal text-xl w-full"
       />
     </div>
   );

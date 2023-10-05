@@ -62,7 +62,7 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center min-h-screen bg-slate-900 p-6">
+    <div className="flex justify-center min-h-screen bg-gray-800 p-6">
       <div className="flex flex-col justify-center items-center container mx-auto gap-2.5">
         <div className="flex flex-col	max-w-md w-full relative">
           <Contraseña
@@ -71,7 +71,7 @@ function App() {
           />
           {passwordResult !== "" && (
             <IconoCopiar
-              styles="cursor-pointer fill-slate-400 hover:fill-teal-300 absolute bottom-2.5 right-2"
+              styles="cursor-pointer fill-slate-400 hover:fill-black absolute bottom-2.5 right-2"
               onClick={() => copyPassword()}
             />
           )}
@@ -90,7 +90,7 @@ function App() {
           <label className="py-1 font-semibold text-sm text-slate-400">
             Opciones
           </label>
-          <div className="flex flex-col	max-w-md w-full bg-slate-800 p-5 rounded-md">
+          <div className="flex flex-col	max-w-md w-full bg-blue-600 p-5 rounded-md">
             <ul className="text-white">
               <Opciones
                 label="Con numeros"
