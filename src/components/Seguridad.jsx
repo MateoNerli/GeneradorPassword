@@ -3,11 +3,11 @@ function Seguridad({ password }) {
     const longitud = password.length;
 
     if (longitud >= 4 && longitud <= 8) {
-      return "con baja seguridad";
+      return "tiene baja seguridad";
     } else if (longitud > 8 && longitud <= 12) {
-      return "con media seguridad";
+      return "tiene media seguridad";
     } else if (longitud > 12) {
-      return "con buena seguridad";
+      return "tiene buena seguridad";
     } else {
       return "";
     }
@@ -15,23 +15,28 @@ function Seguridad({ password }) {
 
   const seguridad = evaluarSeguridad();
 
+  // Definir clases CSS para diferentes niveles de seguridad
+  let colorClase = "";
+  if (seguridad === "tiene baja seguridad") {
+    colorClase = "bg-red-500";
+  } else if (seguridad === "tiene media seguridad") {
+    colorClase = "bg-yellow-500";
+  } else if (seguridad === "tiene buena seguridad") {
+    colorClase = "bg-green-500";
+  }
+
   return (
-    <div className="text-white mt-2">
-      {password.length > 0 && (
-        <p
-          className={`text-${
-            seguridad === "con baja seguridad"
-              ? "red"
-              : seguridad === "con media seguridad"
-              ? "yellow"
-              : seguridad === "con buena seguridad"
-              ? "green"
-              : "white"
-          }-600`}
-        >
-          Contraseña {seguridad}
+    <div className="flex flex-col max-w-md w-full">
+      <label className="py-1 font-semibold text-sm text-slate-400">
+        Seguridad
+      </label>
+      <div
+        className={`flex flex-col max-w-md w-full p-5 rounded-md ${colorClase}`}
+      >
+        <p className="text-black">
+          <strong>{password}</strong> {seguridad}
         </p>
-      )}
+      </div>
     </div>
   );
 }

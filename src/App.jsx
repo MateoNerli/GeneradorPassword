@@ -76,7 +76,6 @@ function App() {
             />
           )}
         </div>
-        <Seguridad password={passwordResult} />
         <Longitud
           value={passwordOptions.length}
           onChange={(e) =>
@@ -148,6 +147,7 @@ function App() {
           </div>
         </div>
 
+        <Seguridad password={passwordResult} />
         <Boton onClick={() => generatePassword()} />
       </div>
       <Notificacion />
